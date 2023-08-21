@@ -6,7 +6,6 @@ services:
     container_name: ziralink-api
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
-      # ZIRALINK_CONNECTIONSTRINGS_DB: Data Source=mssql,1433;Initial Catalog=ziralink;User ID=sa;Password=Abcd@123456
       ZIRALINK_CONNECTIONSTRINGS_DB: "Data Source=/app/data/database.db"
       ZIRALINK_CONNECTIONSTRINGS_RABBITMQ: "amqp://user:Pass123$@rabbitmq:5672/"
       ZIRALINK_CONNECTIONSTRINGS_REDIS: "redis:6379"
@@ -38,7 +37,6 @@ services:
     container_name: ziralink-ids
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
-      # ZIRALINK_CONNECTIONSTRINGS_DB: Data Source=mssql,1433;Initial Catalog=ziralink;User ID=sa;Password=Abcd@123456
       ZIRALINK_CONNECTIONSTRINGS_DB: "Data Source=/app/data/database.db"
       ZIRALINK_API_URL: "https://ids.ziralink.com:5001"
       ZIRALINK_CLIENT_URL: "https://client.ziralink.com:8001"
@@ -50,7 +48,6 @@ services:
       - "5001:5001"
     networks:
       net:
-        # ipv4_address: 172.20.0.2
     extra_hosts:
     - "ids.ziralink.com:127.0.0.1"
     volumes:
@@ -119,25 +116,9 @@ services:
       - "953:953"
     networks:
       - net
-  # mssql:
-  #   image: mcr.microsoft.com/mssql/server:2022-latest
-  #   container_name: mssql-container
-  #   environment:
-  #     MSSQL_SA_PASSWORD: Abcd@123456
-  #     ACCEPT_EULA: Y
-  #   ports:
-  #     - "1533:1433"
-  #   networks:
-  #     - net
-  #   volumes:
-  #     - mssql-data:/var/opt/mssql
 
 networks:
   net:
-    # driver: bridge
-    # ipam:
-    #   config:
-    #     - subnet: 172.20.0.0/24
 
 volumes:
   ziralink-api-data: 
