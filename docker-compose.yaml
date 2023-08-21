@@ -38,7 +38,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
       ZIRALINK_CONNECTIONSTRINGS_DB: "Data Source=/app/data/database.db"
-      ZIRALINK_API_URL: "https://ids.ziralink.com:5001"
+      ZIRALINK_API_URL: "https://api.ziralink.com:6001"
       ZIRALINK_CLIENT_URL: "https://client.ziralink.com:8001"
       ASPNETCORE_URLS: "https://+:5001"
       ASPNETCORE_HTTPS_PORT: "5001"
@@ -52,22 +52,6 @@ services:
     - "ids.ziralink.com:127.0.0.1"
     volumes:
       - ziralink-ids-data:/app/data
-  redis:
-    image: bitnami/redis:7.0.7
-    container_name: ziralink-redis
-    environment:
-      ALLOW_EMPTY_PASSWORD: "yes"
-    networks:
-      - net
-    volumes:
-      - redis-data:/bitnami/redis/data/
-  web:
-    image: ziralink.web
-    container_name: ziralink-web
-    ports:
-      - "4001:443"
-    volumes:
-      - ziralink-web-data:/var/log/nginx/
   server:
     image: ziralink.server
     container_name: ziralink-server
@@ -91,6 +75,25 @@ services:
     depends_on:
       - ids
       - api
+      - rabbitmq
+  web:
+    image: ziralink.web
+    container_name: ziralink-web
+    ports:
+      - "4001:443"
+    volumes:
+      - ziralink-web-data:/var/log/nginx/
+    depends_on:
+      - api
+  redis:
+    image: bitnami/redis:7.0.7
+    container_name: ziralink-redis
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+      - net
+    volumes:
+      - redis-data:/bitnami/redis/data/
   rabbitmq:
     image: bitnami/rabbitmq:latest
     container_name: ziralink-rabbitmq
