@@ -1,0 +1,4 @@
+zone "ziralink.local." {    
+    type master;    
+    file "/etc/bind/zones/db.ziralink.local";
+};

@@ -10,9 +10,9 @@ services:
       ZIRALINK_CONNECTIONSTRINGS_RABBITMQ: "amqp://user:Pass123$@rabbitmq:5672/"
       ZIRALINK_CONNECTIONSTRINGS_REDIS: "redis:6379"
       ZIRALINK_REDIS_PASSWORD: ""
-      ZIRALINK_URL_IDS: "https://ids.ziralink.com:5001"
-      ZIRALINK_REDIRECTURI: "https://ziralink.com:4001/signin-result"
-      ZIRALINK_WEB_URL: "https://ziralink.com:4001"
+      ZIRALINK_URL_IDS: "https://ids.ziralink.local:5001"
+      ZIRALINK_REDIRECTURI: "https://ziralink.local:4001/signin-result"
+      ZIRALINK_WEB_URL: "https://ziralink.local:4001"
       ASPNETCORE_URLS: "https://+:6001"
       ASPNETCORE_HTTPS_PORT: "6001"
       ASPNETCORE_Kestrel__Certificates__Default__Password: "zira_cert"
@@ -22,9 +22,9 @@ services:
     networks:
       - net
     extra_hosts:
-    - "api.ziralink.com:127.0.0.1"
+    - "api.ziralink.local:127.0.0.1"
     links:
-      - "ids:ids.ziralink.com"
+      - "ids:ids.ziralink.local"
     volumes:
       - ziralink-api-data:/app/data
     depends_on:
@@ -38,8 +38,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
       ZIRALINK_CONNECTIONSTRINGS_DB: "Data Source=/app/data/database.db"
-      ZIRALINK_API_URL: "https://api.ziralink.com:6001"
-      ZIRALINK_CLIENT_URL: "https://client.ziralink.com:8001"
+      ZIRALINK_API_URL: "https://api.ziralink.local:6001"
+      ZIRALINK_CLIENT_URL: "https://client.ziralink.local:8001"
       ASPNETCORE_URLS: "https://+:5001"
       ASPNETCORE_HTTPS_PORT: "5001"
       ASPNETCORE_Kestrel__Certificates__Default__Password: "zira_cert"
@@ -49,7 +49,7 @@ services:
     networks:
       net:
     extra_hosts:
-    - "ids.ziralink.com:127.0.0.1"
+    - "ids.ziralink.local:127.0.0.1"
     volumes:
       - ziralink-ids-data:/app/data
   server:
@@ -58,9 +58,9 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
       ZIRALINK_CONNECTIONSTRINGS_RABBITMQ: "amqp://user:Pass123$@rabbitmq:5672/"
-      ZIRALINK_DEFAULT_DOMAIN: ".app.ziralink.com:7001"
-      ZIRALINK_API_URL: "https://api.ziralink.com:6001/"
-      ZIRALINK_IDS_URL: "https://ids.ziralink.com:5001/"
+      ZIRALINK_DEFAULT_DOMAIN: ".app.ziralink.local:7001"
+      ZIRALINK_API_URL: "https://api.ziralink.local:6001/"
+      ZIRALINK_IDS_URL: "https://ids.ziralink.local:5001/"
       ASPNETCORE_URLS: "https://+:7001"
       ASPNETCORE_HTTPS_PORT: "7001"
       ASPNETCORE_Kestrel__Certificates__Default__Password: "zira_cert"
@@ -68,8 +68,8 @@ services:
     ports:
       - "7001:7001"
     links:
-      - "api:api.ziralink.com"
-      - "ids:ids.ziralink.com"
+      - "api:api.ziralink.local"
+      - "ids:ids.ziralink.local"
     networks:
       - net
     depends_on:
