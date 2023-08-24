@@ -90,6 +90,8 @@ services:
     container_name: ziralink-redis
     environment:
       ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "6479:6379"
     networks:
       - net
     volumes:
