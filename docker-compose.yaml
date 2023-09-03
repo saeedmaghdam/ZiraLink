@@ -129,5 +129,5 @@ volumes:
   ziralink-api-data: 
   ziralink-ids-data: 
   ziralink-web-data:
-  redis-data: 
+  redis-data:
   rabbitmq-data:
