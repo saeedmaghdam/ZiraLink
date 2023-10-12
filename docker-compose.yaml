@@ -13,16 +13,14 @@ services:
       ZIRALINK_URL_IDS: "https://ids.ziralink.local:5001"
       ZIRALINK_REDIRECTURI: "https://ziralink.local:4001/signin-result"
       ZIRALINK_WEB_URL: "https://ziralink.local:4001"
-      ASPNETCORE_URLS: "https://+:6001"
-      ASPNETCORE_HTTPS_PORT: "6001"
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "zira_cert"
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/server.pfx"
+      ASPNETCORE_URLS: "https://api.ziralink.local;https://api.ziralink.local:6001"
+      ASPNETCORE_HTTPS_PORT: "443"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Hello#rt"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/s3d-local-ziralink-server.pfx"
     ports:
-      - "6001:6001"
+      - "6001:443"
     networks:
       - net
-    extra_hosts:
-    - "api.ziralink.local:127.0.0.1"
     links:
       - "ids:ids.ziralink.local"
     volumes:
@@ -40,16 +38,14 @@ services:
       ZIRALINK_CONNECTIONSTRINGS_DB: "Data Source=/app/data/database.db"
       ZIRALINK_API_URL: "https://api.ziralink.local:6001"
       ZIRALINK_CLIENT_URL: "https://client.ziralink.local:8001"
-      ASPNETCORE_URLS: "https://+:5001"
-      ASPNETCORE_HTTPS_PORT: "5001"
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "zira_cert"
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/server.pfx"
+      ASPNETCORE_URLS: "https://ids.ziralink.local;https://ids.ziralink.local:5001"
+      ASPNETCORE_HTTPS_PORT: "443"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Hello#rt"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/s3d-local-ziralink-server.pfx"
     ports:
-      - "5001:5001"
+      - "5001:443"
     networks:
       net:
-    extra_hosts:
-    - "ids.ziralink.local:127.0.0.1"
     volumes:
       - ziralink-ids-data:/app/data
   server:
@@ -61,12 +57,12 @@ services:
       ZIRALINK_DEFAULT_DOMAIN: ".app.ziralink.local:7001"
       ZIRALINK_API_URL: "https://api.ziralink.local:6001/"
       ZIRALINK_IDS_URL: "https://ids.ziralink.local:5001/"
-      ASPNETCORE_URLS: "https://+:7001"
-      ASPNETCORE_HTTPS_PORT: "7001"
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "zira_cert"
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/server.pfx"
+      ASPNETCORE_URLS: "https://+:443;https://+:7001"
+      ASPNETCORE_HTTPS_PORT: "443"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Hello#rt"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/s3d-local-ziralink-server.pfx"
     ports:
-      - "7001:7001"
+      - "7001:443"
     links:
       - "api:api.ziralink.local"
       - "ids:ids.ziralink.local"
